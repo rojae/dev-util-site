@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default-layout}">
+
+<th:block layout:fragment="content">
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#btn-submit").click(function(){
+                const input = $.trim($('#input').val());
+                $.ajax({
+                    url : "/work/toString-json",
+                    method: "post",
+                    contentType : "application/json; charset=utf-8",
+                    data: input,
+                    dataType : "json",
+                    success : function(data){
+                        const pretty = JSON.stringify(data, undefined, 4);
+                        $("#output").val(pretty);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <h3 class="mb-2">toString -> JSON</h3>
+        <hr/>
+
+        <div class="row-12">
+            <div class="form-group">
+                <label for="input">Input toString</label>
+                <textarea class="form-control mb-5" id="input" rows="20"></textarea>
+
+                <button type="button" id="btn-submit" class="btn btn-success btn-block mb-5">Convert</button>
+
+                <label for="output">Output JSON</label>
+                <textarea class="form-control" id="output" rows="20"></textarea>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+
+</html>

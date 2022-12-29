@@ -1,0 +1,3 @@
+rootProject.name = 'dev-util-site'
+include 'dev-util-mvc'
+
